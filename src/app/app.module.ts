@@ -20,9 +20,11 @@ import { ShippingComponent } from './shipping/shipping.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: ProductListComponent },
+      // :productId= parametre du chemin//
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
+
     ])
   ],
   declarations: [
@@ -36,7 +38,7 @@ import { ShippingComponent } from './shipping/shipping.component';
   ],
   bootstrap: [
     AppComponent
-  ]
+  ], 
 })
 export class AppModule { }
 

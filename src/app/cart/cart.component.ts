@@ -21,12 +21,18 @@ export class CartComponent {
       address: ''
     });
   }
-onSubmit(customerData) {
+
+  onSubmit(customerData) {
     // Process checkout data here
     console.warn('Your order has been submitted', customerData);
  
     this.items = this.cartService.clearCart();
     this.checkoutForm.reset();
+  }
+
+  clearCart(){
+    this.cartService.clearCart();
+    this.items = this.cartService.getItems();
   }
 
 }

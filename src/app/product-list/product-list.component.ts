@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { ProductService } from '../product.service';
 import { products } from '../products';
 
 @Component({
@@ -8,7 +8,19 @@ import { products } from '../products';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  products = products;
+//j'utilise un getteur pour récupéré l'instance de mon objet.
+  get newTabProducts() {
+    return this.productService.getnewTabProduct();
+  }
+// je mets dans mon constructeur mon product service
+  constructor(private productService: ProductService) {
+  }
+
+  // Equivalent a :
+  // private productService: ProductService;
+  // constructor(productService: ProductService) {
+  //   this.productService = productService;
+  // }
 
   share() {
     window.alert('The product has been shared!');
