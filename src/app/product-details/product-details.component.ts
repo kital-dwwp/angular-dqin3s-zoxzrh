@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { products } from '../products';
 import { CartService } from '../cart.service';
-import { ProductService } from '../product.service';
+import { ProductService, ProductDetails } from '../product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -11,7 +11,7 @@ import { ProductService } from '../product.service';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  product;
+  product: ProductDetails;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +28,22 @@ export class ProductDetailsComponent implements OnInit {
 
       //this.product = products[productId];//
       // 
-     this.product = this.productservice.getItem(productId);
+
+      // Version synchrone
+      this.product = this.productservice.getItem(productId);
+
+      // Version asynchrone
+      this.productservice.getItemAsync(productId)
+        .then((produit: ProductDetails) => {
+          this.product = produit;
+        })
+        .catch((err: Error) => { 
+          console.error(err); 
+        });
+
+      // Version asynchrone avec async (ES6)
+      // this.product = await this.productservice.getItemAsync(productId);
+      // console.log(this.product);
     });
   }
 
