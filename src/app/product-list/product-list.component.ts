@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../product.service';
+import { ProductService, ProductDetails } from '../product.service';
 import { products } from '../products';
+import { APIService } from '../api.service';
 
 @Component({
   selector: 'app-product-list',
@@ -9,13 +10,41 @@ import { products } from '../products';
 })
 export class ProductListComponent {
 //j'utilise un getteur pour récupéré l'instance de mon objet.
-  get newTabProducts() {
-    return this.productService.getnewTabProduct();
-  }
-// je mets dans mon constructeur mon product service
-  constructor(private productService: ProductService) {
-  }
+  // get newTabProducts() {
+  //   return this.productService.getnewTabProduct();
+  // }
 
+
+  item;
+
+  public productList: ProductDetails[] 
+
+  // je mets dans mon constructeur mon product service
+  constructor(private productService: ProductService) {
+    // Version synchrone
+    //this.productList = this.productService.getnewTabProduct();
+
+    // Version asynchrone
+    this.productService.getlist()
+      .then(arr => {
+        this.productList = arr;
+      });
+  }
+//   getitem(){
+//     return new Promise((resolve,reject)=>{
+//       let ite=this.productService.getlist();
+//       if (ite){
+//         resolve(ite);
+//       }else{
+//         reject(new Error("?"));
+//       }
+//     })
+//   }
+
+// getite(){
+//   this.productService.getlist().then(arr=>
+//   )
+// }
   // Equivalent a :
   // private productService: ProductService;
   // constructor(productService: ProductService) {

@@ -1,7 +1,7 @@
 
 <h2>Products</h2>
 
-<div *ngFor="let myProduct of newTabProducts">
+<div *ngFor="let myProduct of productList">
 
   <h3>
     <a [title]="myProduct.name + ' details'" [routerLink]="['/products', myProduct.id]">>
@@ -9,18 +9,15 @@
     </a>
   </h3>
 
-  <p *ngIf="myProduct.description" class="product-description">
-    Description: {{ myProduct.description }}
+  <p *ngIf="myProduct.description" [innerHTML]="myProduct.description" class="product-description">
+    <!-- Description: {{ myProduct.excerpt }} -->
   </p>
 
   <button (click)="share()">
   Share
   </button>
 
-  <app-product-alerts
-    [product]="myProduct"
-    (notify)="onNotify()">
-  </app-product-alerts>
+  <app-product-alerts [product]="myProduct" (notify)="onNotify()"></app-product-alerts>
 </div>
 <!-- 
 Copyright Google LLC. All Rights Reserved.

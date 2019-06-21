@@ -12,5 +12,9 @@ export class ProductAlertsComponent {
   @Input() product;
   @Output() notify = new EventEmitter();
   // output car "alert" l'element parent.
+
+  public onCustomClick(){
+    this.notify.emit();
+  }
 }
 

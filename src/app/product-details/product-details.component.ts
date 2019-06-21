@@ -20,15 +20,23 @@ export class ProductDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.route.paramMap.subscribe(params => {
       // + equivalent parseFloat.
+      // Je récupère l'id produit depuis l'url
       const productId = +params.get('productId');
-      debugger;    
-      //this.product=this.productservice.getnewTabProduct();
 
+      this.productservice.getProductById(productId)
+          .then((detail: ProductDetails) =>{
+            this.product = detail;
+            console.log(detail);
+          });
+
+      // debugger;    
+      //this.product=this.productservice.getnewTabProduct();
       //this.product = products[productId];//
       // 
-
+      /*
       // Version synchrone
       this.product = this.productservice.getItem(productId);
 
@@ -41,10 +49,14 @@ export class ProductDetailsComponent implements OnInit {
           console.error(err); 
         });
 
+        */
+
       // Version asynchrone avec async (ES6)
       // this.product = await this.productservice.getItemAsync(productId);
       // console.log(this.product);
     });
+
+
   }
 
   addToCart(product) {
